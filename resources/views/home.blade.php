@@ -55,6 +55,32 @@
     </div>
 </div>
 
+{{-- Tagline Marquee --}}
+<div class="tagline-marquee mb-3">
+    <div class="tagline-track">
+        <span>💫 दिल से जुड़ो, हर पल खास बनाओ</span>
+        <span>✨ नई दोस्ती, नई बातें, हर रात यादगार</span>
+        <span>❤️ Live आओ, दिल की बातें करो</span>
+        <span>😊 Smile, Chat &amp; Enjoy Every Moment</span>
+        <span>💕 यहाँ हर बातचीत में है खास एहसास</span>
+        <span>🌸 Connect करो और बनाओ नई यादें</span>
+        <span>😍 मस्ती भरी बातें, शानदार moments</span>
+        <span>💖 हर क्लिक पर नया connection</span>
+        <span>✨ अपनी पसंद की live company पाओ</span>
+        <span>🔥 अब हर रात होगी entertaining</span>
+        <span>💫 दिल से जुड़ो, हर पल खास बनाओ</span>
+        <span>✨ नई दोस्ती, नई बातें, हर रात यादगार</span>
+        <span>❤️ Live आओ, दिल की बातें करो</span>
+        <span>😊 Smile, Chat &amp; Enjoy Every Moment</span>
+        <span>💕 यहाँ हर बातचीत में है खास एहसास</span>
+        <span>🌸 Connect करो और बनाओ नई यादें</span>
+        <span>😍 मस्ती भरी बातें, शानदार moments</span>
+        <span>💖 हर क्लिक पर नया connection</span>
+        <span>✨ अपनी पसंद की live company पाओ</span>
+        <span>🔥 अब हर रात होगी entertaining</span>
+    </div>
+</div>
+
 {{-- Filter Bar --}}
 <div class="filter-card mb-4">
     <form method="GET" action="{{ route('home') }}" id="filterForm">
@@ -327,6 +353,10 @@
 @push('styles')
 <style>
 .hero-banner { background: linear-gradient(135deg, #00b894 0%, #00cec9 100%); }
+.tagline-marquee { background: linear-gradient(90deg, #00b894, #00cec9); border-radius: 10px; overflow: hidden; padding: 8px 0; }
+.tagline-track { display: flex; gap: 40px; white-space: nowrap; animation: marquee 30s linear infinite; width: max-content; }
+.tagline-track span { color: white; font-size: .82rem; font-weight: 600; }
+@keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
 .hero-bg { position:absolute;inset:0;background:url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E"); }
 .filter-card { background:white;border-radius:14px;padding:14px 16px;box-shadow:0 2px 12px rgba(0,0,0,.06); }
 .model-card { border-radius:16px;border:none;box-shadow:0 2px 12px rgba(0,184,148,.08);transition:transform .2s,box-shadow .2s;overflow:hidden; }
