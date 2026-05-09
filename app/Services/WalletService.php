@@ -85,7 +85,9 @@ class WalletService
     {
         $commission = (float) \App\Models\Setting::get('commission_rate', 20);
         $earning = $amount * (1 - $commission / 100);
+        $adminShare = $amount - $earning;
 
+        // Credit model
         $balanceBefore = $model->wallet_balance;
         $model->addBalance($earning);
         $model->modelProfile()->increment('total_earnings', $earning);
@@ -100,5 +102,25 @@ class WalletService
             'balance_after' => $model->fresh()->wallet_balance,
             'call_id' => $callId,
         ]);
+
+        // Credit admin commission
+        if ($adminShare > 0) {
+            $admin = User::where('role', 'admin')->first();
+            if ($admin) {
+                $adminBalanceBefore = $admin->wallet_balance;
+                $admin->addBalance($adminShare);
+
+                Transaction::create([
+                    'user_id' => $admin->id,
+                    'amount' => $adminShare,
+                    'type' => 'commission',
+                    'status' => 'completed',
+                    'description' => "Commission {$commission}% from call #{$callId}",
+                    'balance_before' => $adminBalanceBefore,
+                    'balance_after' => $admin->fresh()->wallet_balance,
+                    'call_id' => $callId,
+                ]);
+            }
+        }
     }
 }

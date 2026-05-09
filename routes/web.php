@@ -47,19 +47,19 @@ Route::middleware(['auth', 'role:user,model,admin'])->group(function () {
     Route::post('/wallet/verify', [WalletController::class, 'verifyPayment'])->name('wallet.verify');
 
     // Calls
+    Route::get('/call/history', [CallController::class, 'history'])->name('call.history');
+    Route::get('/call/check-balance', [CallController::class, 'checkBalance'])->name('call.check-balance');
     Route::post('/call/initiate', [CallController::class, 'initiate'])->name('call.initiate');
     Route::post('/call/{id}/accept', [CallController::class, 'accept'])->name('call.accept');
     Route::post('/call/{id}/reject', [CallController::class, 'reject'])->name('call.reject');
     Route::post('/call/{id}/end', [CallController::class, 'end'])->name('call.end');
     Route::get('/call/{id}/room', [CallController::class, 'room'])->name('call.room');
-    Route::get('/call/history', [CallController::class, 'history'])->name('call.history');
-    Route::get('/call/check-balance', [CallController::class, 'checkBalance'])->name('call.check-balance');
 
     // Chat
     Route::get('/chat', [ChatController::class, 'index'])->name('chat');
+    Route::get('/chat/unread', [ChatController::class, 'unreadCount'])->name('chat.unread');
     Route::get('/chat/{userId}', [ChatController::class, 'conversation'])->name('chat.conversation');
     Route::post('/chat/send', [ChatController::class, 'send'])->name('chat.send');
-    Route::get('/chat/unread', [ChatController::class, 'unreadCount'])->name('chat.unread');
 });
 
 // Model routes

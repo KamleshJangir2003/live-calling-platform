@@ -495,6 +495,12 @@ document.getElementById('proceedRecharge').addEventListener('click', function() 
     });
 });
 
+// ── Real-time unread chat badge ────────────────────────────
+const chatChannel2 = pusher.subscribe('private-chat.{{ auth()->id() }}');
+chatChannel2.bind('message.sent', function() {
+    document.querySelectorAll('.badge-dot').forEach(el => el.style.display = 'block');
+});
+
 function showToast(msg, type = 'success') {
     const t = document.createElement('div');
     t.className = `alert alert-${type} position-fixed bottom-0 end-0 m-3 shadow`;

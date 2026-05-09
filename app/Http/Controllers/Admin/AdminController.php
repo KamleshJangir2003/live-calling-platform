@@ -26,6 +26,8 @@ class AdminController extends Controller
             'total_revenue' => Transaction::where('type', 'recharge')->where('status', 'completed')->sum('amount'),
             'pending_kyc' => ModelProfile::where('kyc_status', 'pending')->count(),
             'pending_withdrawals' => WithdrawalRequest::where('status', 'pending')->count(),
+            'admin_wallet' => User::where('role', 'admin')->first()?->wallet_balance ?? 0,
+            'total_commission' => Transaction::where('type', 'commission')->where('status', 'completed')->sum('amount'),
         ];
 
         $recentTransactions = Transaction::with('user')->latest()->take(10)->get();
@@ -153,6 +155,7 @@ class AdminController extends Controller
         $settings = [
             'commission_rate' => Setting::get('commission_rate', 20),
             'min_withdrawal' => Setting::get('min_withdrawal', 100),
+            'chat_price' => Setting::get('chat_price', 1),
             'site_name' => Setting::get('site_name', 'LiveCall'),
         ];
         return view('admin.settings', compact('settings'));
@@ -163,10 +166,11 @@ class AdminController extends Controller
         $request->validate([
             'commission_rate' => 'required|numeric|min:0|max:100',
             'min_withdrawal' => 'required|numeric|min:0',
+            'chat_price' => 'required|numeric|min:0',
             'site_name' => 'required|string|max:100',
         ]);
 
-        foreach ($request->only(['commission_rate', 'min_withdrawal', 'site_name']) as $key => $value) {
+        foreach ($request->only(['commission_rate', 'min_withdrawal', 'chat_price', 'site_name']) as $key => $value) {
             Setting::set($key, $value);
         }
 

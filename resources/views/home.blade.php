@@ -33,7 +33,24 @@
             @endguest
         </div>
         <div class="col-4 text-end">
-            <i class="bi bi-camera-video-fill" style="font-size:4rem;opacity:.2"></i>
+            <div id="heroSlider" class="hero-slider">
+                <div class="hero-slide active">
+                    <img src="https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?w=200&h=260&fit=crop&crop=face" alt="Model" class="hero-model-img">
+                    <div class="hero-model-badge"><i class="bi bi-circle-fill text-success me-1" style="font-size:.5rem"></i>Online</div>
+                </div>
+                <div class="hero-slide">
+                    <img src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=200&h=260&fit=crop&crop=face" alt="Model" class="hero-model-img">
+                    <div class="hero-model-badge"><i class="bi bi-circle-fill text-success me-1" style="font-size:.5rem"></i>Online</div>
+                </div>
+                <div class="hero-slide">
+                    <img src="https://images.unsplash.com/photo-1488716820095-cbe80883c496?w=200&h=260&fit=crop&crop=face" alt="Model" class="hero-model-img">
+                    <div class="hero-model-badge"><i class="bi bi-circle-fill text-success me-1" style="font-size:.5rem"></i>Online</div>
+                </div>
+                <div class="hero-slide">
+                    <img src="https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=200&h=260&fit=crop&crop=face" alt="Model" class="hero-model-img">
+                    <div class="hero-model-badge"><i class="bi bi-circle-fill text-success me-1" style="font-size:.5rem"></i>Online</div>
+                </div>
+            </div>
         </div>
     </div>
 </div>
@@ -323,6 +340,11 @@
 .online-dot { display:inline-block;width:10px;height:10px;background:#00b894;border-radius:50%;border:2px solid white;box-shadow:0 0 0 2px rgba(0,184,148,.3);animation:pulse 2s infinite; }
 @keyframes pulse { 0%,100%{box-shadow:0 0 0 2px rgba(0,184,148,.3)} 50%{box-shadow:0 0 0 5px rgba(0,184,148,.1)} }
 .btn-fav { padding:4px;line-height:1; }
+.hero-slider { position:relative;width:110px;height:150px;margin-left:auto; }
+.hero-slide { position:absolute;inset:0;opacity:0;transition:opacity .6s ease; }
+.hero-slide.active { opacity:1; }
+.hero-model-img { width:110px;height:150px;object-fit:cover;border-radius:16px;border:3px solid rgba(255,255,255,.4);box-shadow:0 8px 24px rgba(0,0,0,.25); }
+.hero-model-badge { position:absolute;bottom:6px;left:50%;transform:translateX(-50%);background:rgba(0,0,0,.55);color:#fff;font-size:.6rem;padding:2px 8px;border-radius:20px;white-space:nowrap;backdrop-filter:blur(4px); }
 </style>
 @endpush
 
@@ -392,6 +414,17 @@ document.querySelectorAll('.favorite-btn').forEach(btn => {
         });
     });
 });
+
+// Hero slider
+(function(){
+    const slides = document.querySelectorAll('#heroSlider .hero-slide');
+    let cur = 0;
+    setInterval(() => {
+        slides[cur].classList.remove('active');
+        cur = (cur + 1) % slides.length;
+        slides[cur].classList.add('active');
+    }, 2500);
+})();
 
 function setView(type) {
     const grid = document.getElementById('modelsGrid');

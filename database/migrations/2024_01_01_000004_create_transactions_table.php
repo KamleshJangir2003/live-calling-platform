@@ -11,7 +11,7 @@ return new class extends Migration {
             $table->id();
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->decimal('amount', 10, 2);
-            $table->enum('type', ['recharge', 'call_deduction', 'earning', 'withdrawal', 'refund', 'commission']);
+            $table->enum('type', ['recharge', 'call_deduction', 'chat_deduction', 'earning', 'withdrawal', 'refund', 'commission']);
             $table->enum('status', ['pending', 'completed', 'failed', 'cancelled'])->default('pending');
             $table->string('razorpay_order_id')->nullable();
             $table->string('razorpay_payment_id')->nullable();

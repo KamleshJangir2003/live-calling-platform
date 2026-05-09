@@ -86,13 +86,29 @@
         const text = input.value.trim();
         if (!text) return;
 
-        input.value = '';
+        const sendBtn = document.getElementById('sendBtn');
+        sendBtn.disabled = true;
+
         fetch('/chat/send', {
             method: 'POST',
             headers: { 'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content, 'Content-Type': 'application/json' },
             body: JSON.stringify({ receiver_id: receiverId, message: text })
-        }).then(r => r.json()).then(data => {
-            appendMessage(data.message, true, data.created_at);
+        }).then(r => {
+            if (r.status === 402) {
+                return r.json().then(data => {
+                    if (confirm('⚠️ ' + data.message + '\n\nAbhi recharge karein?')) {
+                        window.location.href = '{{ route("wallet") }}';
+                    }
+                });
+            }
+            return r.json().then(data => {
+                input.value = '';
+                appendMessage(data.message, true, data.created_at);
+            });
+        }).catch(() => {
+            alert('Message send nahi hua. Internet check karein.');
+        }).finally(() => {
+            sendBtn.disabled = false;
         });
     }
 

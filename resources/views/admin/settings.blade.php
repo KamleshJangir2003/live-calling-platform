@@ -28,6 +28,14 @@
                         <input type="number" name="min_withdrawal" class="form-control" value="{{ $settings['min_withdrawal'] }}" min="0" required>
                     </div>
                 </div>
+                <div class="mb-4">
+                    <label class="form-label fw-semibold">Chat Message Price (₹)</label>
+                    <div class="input-group">
+                        <span class="input-group-text">₹</span>
+                        <input type="number" name="chat_price" class="form-control" value="{{ $settings['chat_price'] }}" min="0" step="0.5" required>
+                    </div>
+                    <small class="text-muted">Amount deducted per chat message from user wallet.</small>
+                </div>
                 <button type="submit" class="btn btn-primary fw-bold">
                     <i class="bi bi-check-circle me-2"></i>Save Settings
                 </button>

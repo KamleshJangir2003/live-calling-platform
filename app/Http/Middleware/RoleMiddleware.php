@@ -14,13 +14,13 @@ class RoleMiddleware
             return redirect()->route('login');
         }
 
-        if (!in_array(Auth::user()->role, $roles)) {
-            abort(403, 'Unauthorized.');
-        }
-
         if (Auth::user()->status === 'banned') {
             Auth::logout();
             return redirect()->route('login')->withErrors(['email' => 'Your account has been banned.']);
+        }
+
+        if (!in_array(Auth::user()->role, $roles)) {
+            abort(403, 'Unauthorized.');
         }
 
         return $next($request);

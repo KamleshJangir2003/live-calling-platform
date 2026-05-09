@@ -12,6 +12,8 @@
         ['label'=>'Total Calls','value'=>$stats['total_calls'],'icon'=>'bi-telephone','color'=>'#0984e3','bg'=>'#e8f4fd'],
         ['label'=>'Today Revenue','value'=>'₹'.number_format($stats['today_revenue'],2),'icon'=>'bi-currency-rupee','color'=>'#e17055','bg'=>'#fef0ed'],
         ['label'=>'Total Revenue','value'=>'₹'.number_format($stats['total_revenue'],2),'icon'=>'bi-graph-up','color'=>'#00b894','bg'=>'#e8f8f5'],
+        ['label'=>'Admin Wallet','value'=>'₹'.number_format($stats['admin_wallet'],2),'icon'=>'bi-wallet2','color'=>'#6c5ce7','bg'=>'#f0edff'],
+        ['label'=>'Total Commission','value'=>'₹'.number_format($stats['total_commission'],2),'icon'=>'bi-percent','color'=>'#00b894','bg'=>'#e8f8f5'],
         ['label'=>'Pending KYC','value'=>$stats['pending_kyc'],'icon'=>'bi-person-check','color'=>'#fdcb6e','bg'=>'#fef9e7'],
         ['label'=>'Pending Withdrawals','value'=>$stats['pending_withdrawals'],'icon'=>'bi-cash-stack','color'=>'#d63031','bg'=>'#fdecea'],
     ];

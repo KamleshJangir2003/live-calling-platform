@@ -16,7 +16,9 @@ class HomeController extends Controller
         
         $stats = [
             'total_calls' => \App\Models\Call::where('caller_id', $user->id)->where('status', 'completed')->count(),
-            'total_spent' => \App\Models\Transaction::where('user_id', $user->id)->where('type', 'debit')->sum('amount'),
+            'total_spent' => \App\Models\Transaction::where('user_id', $user->id)
+                ->whereIn('type', ['call_deduction', 'chat_deduction'])
+                ->sum('amount'),
             'favorite_models' => Favorite::where('user_id', $user->id)->count(),
         ];
 

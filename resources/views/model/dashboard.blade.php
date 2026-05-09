@@ -115,7 +115,7 @@
                                 <td>{{ $call->caller->name }}</td>
                                 <td><span class="badge {{ $call->call_type === 'video' ? 'bg-warning text-dark' : 'bg-primary' }}">{{ ucfirst($call->call_type) }}</span></td>
                                 <td>{{ $call->duration_formatted }}</td>
-                                <td class="text-success fw-bold">₹{{ number_format($call->amount * 0.8, 2) }}</td>
+                                <td class="text-success fw-bold">₹{{ number_format($call->amount * (1 - (\App\Models\Setting::get('commission_rate', 20) / 100)), 2) }}</td>
                                 <td class="small text-muted">{{ $call->created_at->diffForHumans() }}</td>
                             </tr>
                         @endforeach
