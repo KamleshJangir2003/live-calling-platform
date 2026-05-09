@@ -12,11 +12,11 @@
             <form action="{{ route('model.profile.update') }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 <div class="mb-3 text-center">
-                    <img src="{{ $user->modelProfile->profile_photo_url }}" width="100" height="100" class="rounded-circle mb-2" style="object-fit:cover">
+                    <img id="profilePreview" src="{{ $user->modelProfile->profile_photo_url }}" width="100" height="100" class="rounded-circle mb-2" style="object-fit:cover">
                     <div>
                         <label class="btn btn-sm btn-outline-primary">
                             <i class="bi bi-camera me-1"></i>Change Photo
-                            <input type="file" name="profile_photo" accept="image/*" class="d-none">
+                            <input type="file" name="profile_photo" accept="image/*" class="d-none" onchange="document.getElementById('profilePreview').src=URL.createObjectURL(this.files[0])">
                         </label>
                     </div>
                 </div>

@@ -36,7 +36,7 @@
                     <tr>
                         <td>
                             <div class="d-flex align-items-center gap-2">
-                                <img src="{{ $model->avatar_url }}" width="36" height="36" class="rounded-circle" style="object-fit:cover">
+                                <img src="{{ $model->modelProfile->profile_photo_url ?? $model->avatar_url }}" width="36" height="36" class="rounded-circle" style="object-fit:cover">
                                 <div>
                                     <div class="fw-bold small">{{ $model->name }}</div>
                                     <small class="text-muted">{{ $model->email }}</small>

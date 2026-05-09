@@ -15,7 +15,7 @@
         </div>
     @endif
 
-    <form method="POST" action="{{ route('admin.models.store') }}">
+    <form method="POST" action="{{ route('admin.models.store') }}" enctype="multipart/form-data">
         @csrf
         <div class="row g-3">
             <div class="col-md-6">
@@ -47,6 +47,11 @@
                 <input type="text" name="country" class="form-control" value="{{ old('country') }}">
             </div>
             <div class="col-12">
+                <label class="form-label">Profile Photo</label>
+                <input type="file" name="profile_photo" class="form-control" accept="image/*" onchange="previewPhoto(this)">
+                <img id="photoPreview" src="" class="mt-2 rounded-circle d-none" width="80" height="80" style="object-fit:cover">
+            </div>
+            <div class="col-12">
                 <label class="form-label">Bio</label>
                 <textarea name="bio" class="form-control" rows="3">{{ old('bio') }}</textarea>
             </div>
@@ -57,3 +62,15 @@
     </form>
 </div>
 @endsection
+
+@push('scripts')
+<script>
+function previewPhoto(input) {
+    const preview = document.getElementById('photoPreview');
+    if (input.files && input.files[0]) {
+        preview.src = URL.createObjectURL(input.files[0]);
+        preview.classList.remove('d-none');
+    }
+}
+</script>
+@endpush

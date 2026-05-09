@@ -153,13 +153,61 @@ class DatabaseSeeder extends Seeder
             ['name'=>'Mei Ling Tan',    'country'=>'Singapore',   'lang'=>'English,Mandarin',     'audio'=>3.5, 'video'=>6.0, 'online'=>true,  'rating'=>4.8, 'calls'=>334, 'bio'=>'Singapore girl. Cosmopolitan, smart and love great conversations!'],
         ];
 
-        // Avatar colors for UI Avatars
-        $colors = ['00b894', 'e17055', '6c5ce7', 'fd79a8', '0984e3', 'fdcb6e', 'e84393', '00cec9', 'd63031', '2d3436'];
+        // Real Unsplash demo photos (face-cropped, portrait)
+        $photos = [
+            'https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?w=400&h=500&fit=crop&crop=face',
+            'https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=400&h=500&fit=crop&crop=face',
+            'https://images.unsplash.com/photo-1488716820095-cbe80883c496?w=400&h=500&fit=crop&crop=face',
+            'https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=400&h=500&fit=crop&crop=face',
+            'https://images.unsplash.com/photo-1517841905240-472988babdf9?w=400&h=500&fit=crop&crop=face',
+            'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=400&h=500&fit=crop&crop=face',
+            'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=400&h=500&fit=crop&crop=face',
+            'https://images.unsplash.com/photo-1521119989659-a83eee488004?w=400&h=500&fit=crop&crop=face',
+            'https://images.unsplash.com/photo-1502823403499-6ccfcf4fb453?w=400&h=500&fit=crop&crop=face',
+            'https://images.unsplash.com/photo-1546961342-ea5f62d5a27b?w=400&h=500&fit=crop&crop=face',
+            'https://images.unsplash.com/photo-1520813792240-56fc4a3765a7?w=400&h=500&fit=crop&crop=face',
+            'https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?w=400&h=500&fit=crop&crop=face',
+            'https://images.unsplash.com/photo-1519699047748-de8e457a634e?w=400&h=500&fit=crop&crop=face',
+            'https://images.unsplash.com/photo-1500917293891-ef795e70e1f6?w=400&h=500&fit=crop&crop=face',
+            'https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=400&h=500&fit=crop&crop=face',
+            'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=400&h=500&fit=crop&crop=face',
+            'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=400&h=500&fit=crop&crop=face',
+            'https://images.unsplash.com/photo-1489424731084-a5d8b219a5bb?w=400&h=500&fit=crop&crop=face',
+            'https://images.unsplash.com/photo-1479936343636-73cdc5aae0c3?w=400&h=500&fit=crop&crop=face',
+            'https://images.unsplash.com/photo-1463453091185-61582044d556?w=400&h=500&fit=crop&crop=face',
+            'https://images.unsplash.com/photo-1512316609839-ce289d3eba0a?w=400&h=500&fit=crop&crop=face',
+            'https://images.unsplash.com/photo-1526510747491-58f928ec870f?w=400&h=500&fit=crop&crop=face',
+            'https://images.unsplash.com/photo-1541823709867-1b206113eafd?w=400&h=500&fit=crop&crop=face',
+            'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=500&fit=crop&crop=face',
+            'https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?w=400&h=500&fit=crop&crop=face',
+            'https://images.unsplash.com/photo-1530268729831-4b0b9e170218?w=400&h=500&fit=crop&crop=face',
+            'https://images.unsplash.com/photo-1531123897727-8f129e1688ce?w=400&h=500&fit=crop&crop=face',
+            'https://images.unsplash.com/photo-1548142813-c348350df52b?w=400&h=500&fit=crop&crop=face',
+            'https://images.unsplash.com/photo-1554151228-14d9def656e4?w=400&h=500&fit=crop&crop=face',
+            'https://images.unsplash.com/photo-1560087637-bf797bc7796a?w=400&h=500&fit=crop&crop=face',
+            'https://images.unsplash.com/photo-1567532939604-b6b5b0db2604?w=400&h=500&fit=crop&crop=face',
+            'https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?w=400&h=500&fit=crop&crop=face',
+            'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=400&h=500&fit=crop&crop=face',
+            'https://images.unsplash.com/photo-1580489944761-15a19d654956?w=400&h=500&fit=crop&crop=face',
+            'https://images.unsplash.com/photo-1586297135537-94bc9ba060aa?w=400&h=500&fit=crop&crop=face',
+            'https://images.unsplash.com/photo-1587614382346-4ec70e388b28?w=400&h=500&fit=crop&crop=face',
+            'https://images.unsplash.com/photo-1590086782957-93c06ef21604?w=400&h=500&fit=crop&crop=face',
+            'https://images.unsplash.com/photo-1592621385612-4d7129426394?w=400&h=500&fit=crop&crop=face',
+            'https://images.unsplash.com/photo-1595152772835-219674b2a163?w=400&h=500&fit=crop&crop=face',
+            'https://images.unsplash.com/photo-1597586124394-fbd6ef244026?w=400&h=500&fit=crop&crop=face',
+            'https://images.unsplash.com/photo-1599566150163-29194dcaad36?w=400&h=500&fit=crop&crop=face',
+            'https://images.unsplash.com/photo-1601412436009-d964bd02edbc?w=400&h=500&fit=crop&crop=face',
+            'https://images.unsplash.com/photo-1607746882042-944635dfe10e?w=400&h=500&fit=crop&crop=face',
+            'https://images.unsplash.com/photo-1610737241336-371badac3b66?w=400&h=500&fit=crop&crop=face',
+            'https://images.unsplash.com/photo-1614289371518-722f2615943d?w=400&h=500&fit=crop&crop=face',
+            'https://images.unsplash.com/photo-1618641986557-1ecd230959aa?w=400&h=500&fit=crop&crop=face',
+            'https://images.unsplash.com/photo-1621592484082-22b0916d4b8e?w=400&h=500&fit=crop&crop=face',
+            'https://images.unsplash.com/photo-1623582854588-d60de57fa33f?w=400&h=500&fit=crop&crop=face',
+            'https://images.unsplash.com/photo-1627161683077-e34782c24d81?w=400&h=500&fit=crop&crop=face',
+            'https://images.unsplash.com/photo-1628157588553-5eeea00af15c?w=400&h=500&fit=crop&crop=face',
+        ];
 
         foreach ($models as $i => $m) {
-            $colorBg = $colors[$i % count($colors)];
-            $avatarUrl = 'https://ui-avatars.com/api/?name=' . urlencode($m['name']) . '&size=200&background=' . $colorBg . '&color=fff&bold=true&format=png';
-
             $user = User::create([
                 'name'           => $m['name'],
                 'email'          => 'model' . ($i + 1) . '@livecall.com',
@@ -185,7 +233,7 @@ class DatabaseSeeder extends Seeder
                 'total_earnings'  => rand(1000, 50000) * 1.0,
                 'total_calls'     => $m['calls'],
                 'rating'          => $m['rating'],
-                'profile_photo'   => null,
+                'profile_photo'   => $photos[$i % count($photos)],
             ]);
         }
 

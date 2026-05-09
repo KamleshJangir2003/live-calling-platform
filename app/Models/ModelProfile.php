@@ -29,6 +29,10 @@ class ModelProfile extends Model
     public function getProfilePhotoUrlAttribute(): string
     {
         if ($this->profile_photo) {
+            // External URL (Unsplash demo photos)
+            if (str_starts_with($this->profile_photo, 'http')) {
+                return $this->profile_photo;
+            }
             return asset('storage/' . $this->profile_photo);
         }
         $colors = ['00b894','e17055','6c5ce7','fd79a8','0984e3','fdcb6e','e84393','00cec9'];

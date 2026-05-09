@@ -185,14 +185,15 @@ class AdminController extends Controller
     public function storeModel(Request $request)
     {
         $request->validate([
-            'name'        => 'required|string|max:100',
-            'email'       => 'required|email|unique:users,email',
-            'phone'       => 'required|string|unique:users,phone',
-            'password'    => 'required|min:6',
-            'audio_price' => 'required|numeric|min:0',
-            'video_price' => 'required|numeric|min:0',
-            'country'     => 'nullable|string|max:100',
-            'bio'         => 'nullable|string|max:500',
+            'name'          => 'required|string|max:100',
+            'email'         => 'required|email|unique:users,email',
+            'phone'         => 'required|string|unique:users,phone',
+            'password'      => 'required|min:6',
+            'audio_price'   => 'required|numeric|min:0',
+            'video_price'   => 'required|numeric|min:0',
+            'country'       => 'nullable|string|max:100',
+            'bio'           => 'nullable|string|max:500',
+            'profile_photo' => 'nullable|image|max:2048',
         ]);
 
         $user = User::create([
@@ -206,13 +207,19 @@ class AdminController extends Controller
             'email_verified_at' => now(),
         ]);
 
+        $photoPath = null;
+        if ($request->hasFile('profile_photo')) {
+            $photoPath = $request->file('profile_photo')->store('model-photos', 'public');
+        }
+
         ModelProfile::create([
-            'user_id'     => $user->id,
-            'audio_price' => $request->audio_price,
-            'video_price' => $request->video_price,
-            'country'     => $request->country,
-            'bio'         => $request->bio,
-            'kyc_status'  => 'approved',
+            'user_id'       => $user->id,
+            'audio_price'   => $request->audio_price,
+            'video_price'   => $request->video_price,
+            'country'       => $request->country,
+            'bio'           => $request->bio,
+            'kyc_status'    => 'approved',
+            'profile_photo' => $photoPath,
         ]);
 
         return redirect()->route('admin.models')->with('success', 'Model created successfully.');
