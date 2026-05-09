@@ -5,9 +5,9 @@
 @section('content')
 <div class="d-flex flex-wrap justify-content-between align-items-center gap-2 mb-3">
     <h6 class="fw-bold mb-0">Users</h6>
-    <form method="GET" class="d-flex gap-2 flex-wrap">
-        <input type="text" name="search" class="form-control form-control-sm" placeholder="Search..." value="{{ request('search') }}" style="min-width:140px">
-        <select name="status" class="form-select form-select-sm" style="min-width:110px">
+    <form method="GET" class="d-flex align-items-center gap-2">
+        <input type="text" name="search" class="form-control form-control-sm" placeholder="Search..." value="{{ request('search') }}" style="width:180px">
+        <select name="status" class="form-select form-select-sm" style="width:120px">
             <option value="">All Status</option>
             <option value="active" {{ request('status') === 'active' ? 'selected' : '' }}>Active</option>
             <option value="banned" {{ request('status') === 'banned' ? 'selected' : '' }}>Banned</option>
