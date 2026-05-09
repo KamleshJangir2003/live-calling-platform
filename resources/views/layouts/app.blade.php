@@ -299,6 +299,56 @@
     </div>
 </div>
 
+{{-- ── Low Balance Alert Modal ── --}}
+@auth
+@if(auth()->user()->isUser())
+<div class="modal fade" id="lowBalanceModal" tabindex="-1" data-bs-backdrop="static">
+    <div class="modal-dialog modal-dialog-centered modal-sm">
+        <div class="modal-content" style="border-radius:20px;overflow:hidden">
+            <div class="modal-body text-center p-4">
+                @if(auth()->user()->wallet_balance <= 0)
+                    <div style="font-size:3rem">😔</div>
+                    <h5 class="fw-bold mt-2 mb-1">Balance Khatam Ho Gaya!</h5>
+                    <p class="text-muted small mb-3">Aapka wallet balance <strong>₹0</strong> ho gaya hai. Call karne ke liye pehle recharge karein.</p>
+                @else
+                    <div style="font-size:3rem">⚠️</div>
+                    <h5 class="fw-bold mt-2 mb-1">Low Balance!</h5>
+                    <p class="text-muted small mb-3">Aapka wallet balance sirf <strong>₹{{ number_format(auth()->user()->wallet_balance, 2) }}</strong> bacha hai. Recharge karein taaki calls jaari rahe.</p>
+                @endif
+                <div class="d-flex gap-2">
+                    <button class="btn btn-outline-secondary flex-fill" id="lowBalLaterBtn">Baad Mein</button>
+                    <button class="btn btn-primary flex-fill fw-bold" id="lowBalRechargeBtn">
+                        <i class="bi bi-plus-circle me-1"></i>Recharge Karo
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const balance = {{ auth()->user()->wallet_balance }};
+    const dismissedAt = localStorage.getItem('lowBalDismissed_{{ auth()->id() }}');
+    const hoursPassed = dismissedAt ? (Date.now() - parseInt(dismissedAt)) / 36e5 : 999;
+
+    if (balance <= 50 && hoursPassed >= 1) {
+        setTimeout(() => new bootstrap.Modal(document.getElementById('lowBalanceModal')).show(), 800);
+    }
+
+    document.getElementById('lowBalLaterBtn').addEventListener('click', function() {
+        localStorage.setItem('lowBalDismissed_{{ auth()->id() }}', Date.now());
+        bootstrap.Modal.getInstance(document.getElementById('lowBalanceModal')).hide();
+    });
+
+    document.getElementById('lowBalRechargeBtn').addEventListener('click', function() {
+        bootstrap.Modal.getInstance(document.getElementById('lowBalanceModal')).hide();
+        setTimeout(() => new bootstrap.Modal(document.getElementById('walletModal')).show(), 400);
+    });
+});
+</script>
+@endif
+@endauth
+
 {{-- ── Incoming Call Modal ── --}}
 <div class="modal fade call-ring-modal" id="incomingCallModal" tabindex="-1" data-bs-backdrop="static">
     <div class="modal-dialog modal-dialog-centered modal-sm">
