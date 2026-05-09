@@ -5,6 +5,7 @@
 @section('content')
 <div class="d-flex justify-content-between align-items-center mb-3">
     <h6 class="fw-bold mb-0">Models</h6>
+    <a href="{{ route('admin.models.create') }}" class="btn btn-sm btn-primary">+ Add Model</a>
     <form method="GET" class="d-flex gap-2">
         <select name="kyc_status" class="form-select form-select-sm" onchange="this.form.submit()">
             <option value="">All KYC Status</option>

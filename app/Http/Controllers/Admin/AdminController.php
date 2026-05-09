@@ -173,6 +173,47 @@ class AdminController extends Controller
         return back()->with('success', 'Settings updated.');
     }
 
+    public function createModel()
+    {
+        return view('admin.create-model');
+    }
+
+    public function storeModel(Request $request)
+    {
+        $request->validate([
+            'name'        => 'required|string|max:100',
+            'email'       => 'required|email|unique:users,email',
+            'phone'       => 'required|string|unique:users,phone',
+            'password'    => 'required|min:6',
+            'audio_price' => 'required|numeric|min:0',
+            'video_price' => 'required|numeric|min:0',
+            'country'     => 'nullable|string|max:100',
+            'bio'         => 'nullable|string|max:500',
+        ]);
+
+        $user = User::create([
+            'name'              => $request->name,
+            'email'             => $request->email,
+            'phone'             => $request->phone,
+            'password'          => \Hash::make($request->password),
+            'role'              => 'model',
+            'status'            => 'active',
+            'phone_verified'    => true,
+            'email_verified_at' => now(),
+        ]);
+
+        ModelProfile::create([
+            'user_id'     => $user->id,
+            'audio_price' => $request->audio_price,
+            'video_price' => $request->video_price,
+            'country'     => $request->country,
+            'bio'         => $request->bio,
+            'kyc_status'  => 'approved',
+        ]);
+
+        return redirect()->route('admin.models')->with('success', 'Model created successfully.');
+    }
+
     public function reports()
     {
         $monthlyRevenue = Transaction::where('type', 'recharge')

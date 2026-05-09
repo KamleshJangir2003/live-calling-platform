@@ -79,6 +79,8 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->grou
     Route::get('/users', [AdminController::class, 'users'])->name('users');
     Route::post('/users/{id}/toggle-status', [AdminController::class, 'toggleUserStatus'])->name('users.toggle-status');
     Route::get('/models', [AdminController::class, 'models'])->name('models');
+    Route::get('/models/create', [AdminController::class, 'createModel'])->name('models.create');
+    Route::post('/models/create', [AdminController::class, 'storeModel'])->name('models.store');
     Route::post('/models/{id}/approve-kyc', [AdminController::class, 'approveKyc'])->name('models.approve-kyc');
     Route::post('/models/{id}/reject-kyc', [AdminController::class, 'rejectKyc'])->name('models.reject-kyc');
     Route::get('/withdrawals', [AdminController::class, 'withdrawals'])->name('withdrawals');
